@@ -18,6 +18,8 @@ class EEGSimulation():
             self.data = sio.loadmat(file_path)
             self.sampling_rate = self.data['data'][0][0][0][0][3][0][0]
             self.trial_length = 5 * self.sampling_rate
+            print('sampling_rate', self.sampling_rate)
+
         except ValueError:
              print('could not read data file {0}'.format(file_path))
 
@@ -37,8 +39,9 @@ class EEGSimulation():
                 end = start + self.trial_length
                 self.x.append(raw_data[:, start:end])
 
-        print('self.x', self.x)
-        print('self.y', self.y)
+        del raw_data
+        del data
+
 
 if __name__ == '__main__':
     simulation = EEGSimulation()
